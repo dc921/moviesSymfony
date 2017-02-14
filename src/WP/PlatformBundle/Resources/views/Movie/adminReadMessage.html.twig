@@ -1,0 +1,40 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Admin Message - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+
+</header>
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Espace administrateur</h1>
+        <div class="dline"></div>
+    </div>
+    {{ include ("WPPlatformBundle:Movie:adminMenu.html.twig") }}
+    <div class="tabAdmin col-3-4">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ msg.pseudo }} - {{ msg.mail }}</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>{{ msg.subject }}</strong><br />
+                        
+                        {{ msg.message }}</td>
+                    <td><a href="{{ path('wp_platform_adminDeleteMessage',{"id":msg.id}) }}">Supprimer</a><br /><a href="{{ path ("wp_platform_adminMessage") }}">Retourner</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+</section>
+{% endblock %}
+
+
+

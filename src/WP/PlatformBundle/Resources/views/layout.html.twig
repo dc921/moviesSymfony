@@ -1,0 +1,25 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+
+        <!--__--__--__--__--__--  L O G O  &   N A V    B A R --__--___--__--__--__-->
+        <header>
+            <div id="logo">
+                <h1>Planet Movie <span id="iisrt"><span id="ii">II</span>  <span id="srt">PM</span></span></h1>
+                <div id="tagline">
+                    <h2>Just another movie tracker</h2>
+                </div>
+            </div>
+            {% block bodyContent %}
+            {% endblock%}
+
+            <footer>
+                <p> {% if is_granted('ROLE_ADMIN')  %}<a href="{{ path("wp_platform_adminHome") }}">Espace administrateur</a> - {% endif %}Copyright &copy 2016 IPEPS Seraing - <a href="mailto:david.imbeault921@gmail.com">david.imbeault921@gmail.com</a>. All Rights Reserved.</p>
+            </footer>
+    </div>	
+{% endblock %}

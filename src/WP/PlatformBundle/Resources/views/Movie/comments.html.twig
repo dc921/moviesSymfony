@@ -1,0 +1,37 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Commentaires - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <h1>Avis sur {{ movie.title }}</h1>
+    <div class="comm">
+        {% for comment in comments %}
+            <article>
+                <h2><a href="{{ path('wp_platform_user',{'user':comment.user.username}) }}">{{ comment.user.username }}</a></h2>
+                <p>
+                    {{ comment.comment }} 
+                </p>
+            </article>
+        {% endfor %}
+    </div>
+    {% if nbPages > 1 %}
+        <ul class="pagination">
+            {% for p in range(1, nbPages) %}
+                <li{% if p == page %} class="active"{% endif %}>
+                    <a href="{{ path('wp_platform_commentsMovie', {'id':movie.id,'page': p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p class="seeMore">
+        <a href="{{ path('wp_platform_movie',{'id':movie.id}) }}" class="rm">Retourner sur la fiche du film</a>
+    </p>
+</section>
+{% endblock %}

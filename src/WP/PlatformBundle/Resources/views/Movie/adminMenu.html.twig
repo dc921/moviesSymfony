@@ -1,0 +1,13 @@
+{% set route = app.request.get('_route') %}
+
+
+<nav class="adminNav col-1-4">
+    <ul>
+        <li><a href="{{ path ("wp_platform_adminHome") }}" {{ 'adminHome' in route ? 'class="current"' }}>Accueil</a></li>
+        <li><a href="{{ path ("wp_platform_adminMovie") }}" {{ 'adminEditMovie' in route ? 'class="current"' }}{{ 'adminAddMovie' in route ? 'class="current"' }}{{ 'adminMovie' in route ? 'class="current"' }}>Films</a></li>
+        <li><a href="{{ path ("wp_platform_adminDirector") }}" {{ 'adminEditDirector' in route ? 'class="current"' }}{{ 'adminAddDirector' in route ? 'class="current"' }}{{ 'adminDirector' in route ? 'class="current"' }}>Realisateurs</a></li>
+        <li><a href="{{ path ("wp_platform_adminUsers") }}" {{ 'adminUsers' in route ? 'class="current"' }}>Utilisateurs</a></li>
+        <li><a href="{{ path ("wp_platform_adminMessage") }}" {{ 'adminReadMessage' in route ? 'class="current"' }}{{ 'adminMessage' in route ? 'class="current"' }}>Messages</a></li>
+        <li><a href="{{ path ("wp_platform_home") }}">Retourner sur le site</a></li>
+    </ul>
+</nav>

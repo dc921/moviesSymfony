@@ -1,0 +1,34 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Contact - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <h1>Contact</h1>
+    <!--<form>
+        <label>Pseudo</label>
+        <input type="text" placeholder="Entrez votre pseudo" />
+        <label>Email</label>
+        <input type="email" placeholder="Entrez votre email" />
+        <label>Sujet</label>
+        <select>
+            <option>Demande d'ajout d'un film</option>
+            <option>Informations incorrectes sur une page</option>
+            <option>Commentaire inapproprié/spoil</option>
+            <option>Autre</option>
+        </select>
+        <label>Message</label>
+        <textarea placeholder="Entrez votre message" rows="10"></textarea>
+        <input type="submit" value="Envoyer" />
+        <input type="reset" value="Effacer" />
+    </form>-->
+    {{ form(form) }}
+</section>
+
+{% endblock %}

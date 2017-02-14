@@ -1,0 +1,32 @@
+{% extends "WPUserBundle::layout.html.twig" %}
+
+{% block title %}
+    Se connecter - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+<section>
+    <div class="col-1-2">
+        <h2>S'inscrire</h2>
+        {{ form(form) }}
+    </div>
+    <div class="col-1-2 lastarticle" >
+        <h2>Se connecter</h2>
+        {% if error %}
+            <div>{{ error.message }}</div>
+        {% endif %}
+        <form action="{{ path('fos_user_security_check') }}" method="post">
+            <label for="username">Pseudo</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Entrez votre pseudo" />
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="_password" placeholder="Entrez votre mot de passe" />
+            <input type="submit" value="Se connecter" name="_submit" />
+            <input type="reset" value="Effacer" />
+        </form>
+    </div>
+</section>
+
+
+{% endblock %}

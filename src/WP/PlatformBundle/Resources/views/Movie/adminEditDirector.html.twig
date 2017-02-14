@@ -1,0 +1,21 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Admin Réalisateur - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+</header>
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Espace administrateur</h1>
+        <div class="dline"></div>
+    </div>
+    {{ include ("WPPlatformBundle:Movie:adminMenu.html.twig") }}
+    <div class="col-3-4 tabAdmin">
+        <h2>Modifier realisateur</h2>
+        {{ form(form) }}
+    </div>
+</section>
+{% endblock %}

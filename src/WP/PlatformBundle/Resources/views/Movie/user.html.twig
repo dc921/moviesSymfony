@@ -1,0 +1,65 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Profil - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <h1>{{ user.username }}</h1>
+    <div>
+        <article  id="profil" class="col-1-4">
+            <img src="{{ asset(user.image.webPath) }}" alt="{{ user.image.alt }}" width="210" height="210" />
+        </article>
+        <article class="col-1-2">
+            <ul class="infoM">
+                <li><span>Email : </span>{{ user.email }}</li>
+                <li><span>Dernière connexion : </span>{{ user.lastLogin|date('H:i d-m-Y') }}</li>
+                <li><span>Nombre de films visionnées :</span> {{ his | length }}</li>
+                <li><span>Pour une durée de</span> {{ duration }}min</li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.username == app.request.get('user') %}
+                    <li><a href="{{ path ("wp_platform_updateUser",{'user':app.user.username}) }}">Modifier mon profil</a></li>
+                    {% endif %}
+            </ul>
+        </article>
+        <div class="clear"></div>
+    </div>
+    {% if wishlist is not empty %}
+        <h2>Liste de souhait</h2>
+        <div class="list">
+            {% for wish in wishlist %}
+                <article class="col-1-6">
+                    <a href="{{ path('wp_platform_movie',{'id':wish.movie.id}) }}"><img src="{{asset(wish.movie.image.webPath)}}" alt="" width="140" /></a>
+                </article>
+            {% endfor %}
+            <div class="clear"></div>
+            {% if wishlist|length == 6 %}
+                <p class="seeMore">
+                    <a href="{{ path ("wp_platform_wishlist",{'user':app.request.get('user')}) }}" class="rm">Voir plus...</a>
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if history is not empty %}
+        <h2>Derniers films regardes</h2>
+        <div class="list">
+            {% for view in history %}
+                <article class="col-1-6">
+                    <a href="{{ path('wp_platform_movie',{'id':view.movie.id}) }}"><img src="{{ asset(view.movie.image.webPath) }}" alt="" width="140" /></a>
+                </article>
+            {% endfor %}
+            <div class="clear"></div>
+            {% if history|length == 6 %}
+                <p class="seeMore">
+                    <a href="{{ path ("wp_platform_history",{'user':app.request.get('user')}) }}" class="rm">Voir plus...</a>
+                </p>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

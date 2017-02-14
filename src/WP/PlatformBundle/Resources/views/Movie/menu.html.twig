@@ -1,0 +1,17 @@
+{% set route = app.request.get('_route') %}
+
+
+<nav>
+    <ul>
+        <li><a href="{{ path ("wp_platform_home") }}" {{ 'home' in route ? 'class="current"' }}>Accueil</a></li>
+        <li><a href="{{ path ("wp_platform_recentMovies") }}" {{ 'mostViewMovies' in route ? 'class="current"' }}{{ 'recentMovies' in route ? 'class="current"' }}{{ 'movie' in route ? 'class="current"' }}{{ 'comments' in route ? 'class="current"' }}{{ 'director' in route ? 'class="current"' }}>Films</a></li>
+        <li><a href="{{ path ("wp_platform_search") }}" {{ 'search' in route ? 'class="current"' }}>Recherche</a></li>
+        <li><a href="{{ path ("wp_platform_contact") }}" {{ 'contact' in route ? 'class="current"' }}>Contact</a></li>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li><a href="{{ path ("wp_platform_user",{'user':app.user.username}) }}" {{ 'user' in route ? 'class="current"' }} >Profil</a></li>
+            <li><a href="{{ path ("fos_user_security_logout") }}">Deconnexion</a></li>
+        {% else %}
+            <li><a href="{{ path ("fos_user_security_login") }}" {{ 'login' in route ? 'class="current"' }}>Connexion</a></li>
+        {% endif %}
+    </ul>
+</nav>

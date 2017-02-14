@@ -1,0 +1,36 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Admin - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+</header>
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Espace administrateur</h1>
+        <div class="dline"></div>
+    </div>
+    {{ include ("WPPlatformBundle:Movie:adminMenu.html.twig") }}
+    <div class="tabAdmin col-3-4">
+        <table>
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Connexion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in admins %}
+                    <tr>
+                        <td>{{ admin.username }}</td>
+                        <td>{{ admin.lastLogin | date('d/m/Y H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="clear"></div>
+</section>
+{% endblock %}

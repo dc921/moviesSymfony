@@ -1,0 +1,72 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Film - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <h1>{{ movie.title }}</h1>
+    <div>
+        <article class="col-1-4">
+            <img src="{{ asset(movie.image.webPath) }}" alt="{{ movie.image.alt }}" width="210" />
+        </article>
+        <article class="col-1-2">
+            <ul class="infoM">
+                <li><span>Réalisateur :</span> {% for director in directors %}<a href="{{ path('wp_platform_director',{'id':director.id}) }}">{{ director.firstname }} {{ director.name }}{% endfor %}</a></li>
+                <li><span>Date de sortie :</span> {{ movie.releasedate|date('d-m-Y') }}</li>
+                <li><span>Durée :</span> {{ movie.duration }}min</li>
+                <li><span>Pays :</span> {{ movie.country }}</li>
+                <li><span>Genre :</span> {% for genre in movie.genres %}{{ genre.genre }} {% endfor %}</li>
+                <li><span>Synopsis :</span> {{ movie.synopsis }}</li>
+                {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('wp_platform_adminEditMovie',{'id':movie.id}) }}">Modifier le film</a></li>{% endif %}
+            </ul>
+        </article>
+        <article class="col-1-4 lastarticle">
+            <a href="#" class="rm addM{% if view is not empty and view.view == 1%} isSel{% endif %}" id="viewMovie" data-path="{{ path('wp_platform_addView',{'id':app.request.get('id')}) }}" data-movie="{{ movie.id }}" {% if app.user != null %}data-user="{{ app.user.id }}"{% endif %}>Vu</a>
+            <a href="#" class="rm addM{% if wish is not empty and wish.wish == 1%} isSel{% endif %}" id="wishMovie" data-path="{{ path('wp_platform_addWish',{'id':app.request.get('id')}) }}" data-movie="{{ movie.id }}" {% if app.user != null %}data-user="{{ app.user.id }}"{% endif %}>Liste de souhait</a>
+        </article>
+        <div class="clear"></div>
+    </div>
+    <div class="comm">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and myComment.id == null %}
+            <h2>Mon Avis</h2>
+            <article>
+                {{ form(form) }}
+            </article>
+        {% elseif is_granted("IS_AUTHENTICATED_REMEMBERED") and myComment.id != null %}
+            <h2>Mon Avis</h2>
+            <p>{{ myComment.comment }}</p>
+        {% endif %}
+        <h2>Les Avis</h2>
+        {% if comments is empty %}
+            <p>Aucun avis sur le film</p>
+        {% endif %}
+        {% for comment in comments %}
+            <article>
+                <h3><a href="{{ path("wp_platform_user",{'user':comment.user.username}) }}">{{ comment.user.username }}</a></h3>
+                <p>
+                    {{ comment.comment }}
+                </p>
+            </article>
+        {% endfor %}
+        {% if comments | length > 5 %}
+            <p class="seeMore">
+                <a href="{{ path ("wp_platform_commentsMovie",{"id":app.request.get('id')}) }}" class="rm">Voir plus...</a>
+            </p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+    {% if app.user != null %}
+        <script src="{{ asset ("js/jquery-3.1.1.js") }}" type="text/javascript"></script>
+        <script src="{{ asset ("js/ajaxViewWish.js") }}" type="text/javascript"></script>
+    {% endif %}
+{% endblock %}

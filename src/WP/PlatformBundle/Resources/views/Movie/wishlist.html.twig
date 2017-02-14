@@ -1,0 +1,39 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste de souhait - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Liste de souhait</h1>
+        <div class="dline"></div>
+    </div>
+    <div class="list">
+        {% set i = 1 %}
+        {% for wish in wishlist %}
+            <article class="col-1-6{% if i%6 == 0 %} lastarticle{% endif %}">
+                <a href="{{ path ("wp_platform_movie",{'id': wish.movie.id}) }}"><img src="{{ asset(wish.movie.image.webPath) }}" alt="{{ wish.movie.image.alt }}" width="140" /></a>
+            </article>
+            {% set i = i+1 %}
+        {% endfor %}
+    </div>
+    
+    <div class="clear"></div>
+    {% if nbPages > 1 %}
+        <ul class="pagination">
+            {% for p in range(1, nbPages) %}
+                <li{% if p == page %} class="active"{% endif %}>
+                    <a href="{{ path('wp_platform_wishlist', {'user':app.request.get('user'),'page': p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</section>				
+{% endblock %}

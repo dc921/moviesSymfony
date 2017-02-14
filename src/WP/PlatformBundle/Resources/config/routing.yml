@@ -1,0 +1,191 @@
+wp_platform_home:
+    path: /
+    defaults: 
+        _controller: WPPlatformBundle:Movie:index
+
+wp_platform_recentMovies:
+    path: /movie/recent/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:recentMovies
+        page: 1
+    requirements:
+        page: \d*    
+
+wp_platform_movie:
+    path: /movie/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:movie
+    requirements:
+        id: \d+
+   
+wp_platform_addView:
+    path: /movie/{id}/addView
+    defaults:
+        _controller: WPPlatformBundle:Movie:addView
+    methods: [post]
+    
+wp_platform_addWish:
+    path: /movie/{id}/addWish
+    defaults:
+        _controller: WPPlatformBundle:Movie:addWish
+    methods: [post]
+      
+wp_platform_commentsMovie:
+    path: /movie/{id}/comments/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:comments
+        page: 1
+    requirements:
+        id: \d+
+        page: \d*
+        
+wp_platform_director:
+    path: /director/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:director
+    requirements:
+        id: \d+
+
+wp_platform_search:
+    path: /search/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:search
+        page: 1
+        
+wp_platform_contact:
+    path: /contact
+    defaults: 
+        _controller: WPPlatformBundle:Movie:contact
+        
+wp_platform_user:
+    path: /user/{user}
+    defaults:
+        _controller: WPPlatformBundle:Movie:user
+        
+wp_platform_history:
+    path: /user/{user}/history/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:history
+        page: 1
+    requirements:
+        page: \d*
+    
+wp_platform_wishlist:
+    path: /user/{user}/wishlist/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:wishlist
+        page: 1
+    requirements:
+        page: \d*
+        
+wp_platform_updateUser:
+    path: /user/{user}/edit
+    defaults:
+        _controller: WPPlatformBundle:Movie:updateUser
+        
+wp_platform_adminHome:
+    path: /admin/
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminHome
+        
+wp_platform_adminMovie:
+    path: /admin/movie/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminMovie
+        page: 1
+    requirements:
+        page: \d*
+        
+wp_platform_adminAddMovie:
+    path: /admin/movie/add
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminAddMovie
+        
+wp_platform_adminEditMovie:
+    path: /admin/movie/edit/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminEditMovie
+    requirements:
+        id: \d+
+        
+wp_platform_adminRemoveMovie:
+    path: /admin/movie/remove/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminRemoveMovie
+    requirements:
+        id: \d+
+
+wp_platform_adminDirector:
+    path: /admin/director/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminDirector
+        page: 1
+    requirements:
+        page: \d*
+        
+wp_platform_adminAddDirector:
+    path: /admin/director/add
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminAddDirector
+        
+wp_platform_adminEditDirector:
+    path: /admin/director/edit/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminEditDirector
+    requirements:
+        id: \d+
+
+wp_platform_adminRemoveDirector:
+    path: /admin/director/remove/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminRemoveDirector
+    requirements:
+        id: \d+
+
+wp_platform_adminUsers:
+    path: /admin/users/{page}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminUsers
+        page: 1
+    requirements:
+        page: \d*
+        
+wp_platform_adminUsersDelete:
+    path: /admin/users/remove/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminUsersDelete
+    requirements:
+        id: \d+
+  
+wp_platform_adminUsersDowngrade:
+    path: /admin/users/downgrade/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminUsersDowngrade
+    requirements:
+        id: \d+
+        
+wp_platform_adminUsersUpgrade:
+    path: /admin/users/upgrade/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminUsersUpgrade
+    requirements:
+        id: \d+
+        
+wp_platform_adminMessage:
+    path: /admin/message
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminMessage
+        
+wp_platform_adminReadMessage:
+    path: /admin/message/read/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminReadMessage
+    requirements:
+        id: \d+
+        
+wp_platform_adminDeleteMessage:
+    path: /admin/message/remove/{id}
+    defaults:
+        _controller: WPPlatformBundle:Movie:adminDeleteMessage
+    requirements:
+        id: \d+

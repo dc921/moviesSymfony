@@ -1,0 +1,56 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Admin Réalisateur - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+</header>
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Espace administrateur</h1>
+        <div class="dline"></div>
+    </div>
+    {{ include ("WPPlatformBundle:Movie:adminMenu.html.twig") }}
+    <div class="tabAdmin col-3-4">
+        <p class="seeMore">
+            <a href="{{ path ("wp_platform_adminAddDirector") }}">Ajouter un réalisateur</a>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Naissance</th>
+                    <th>Mort</th>
+                    <th>Lieu</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for director in listDirectors %}
+                    <tr>
+                        <td>{{ director.firstname }}</td>
+                        <td>{{ director.name }}</td>
+                        <td>{{ director.birth|date('d-m-Y') }}</td>
+                        <td>{% if director.death is not null %}{{ director.death|date('d-m-Y') }}{% else %}TBA{% endif %}</td>
+                        <td>{{ director.country }}</td>
+                        <td><a href="{{ path ("wp_platform_adminEditDirector",{"id":director.id}) }}">Modifier</a><br /><a href="{{ path("wp_platform_adminRemoveDirector", {'id':director.id}) }}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if nbPages > 1 %}
+            <ul class="pagination">
+                {% for p in range(1, nbPages) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('wp_platform_adminDirector', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</section>
+{% endblock %}

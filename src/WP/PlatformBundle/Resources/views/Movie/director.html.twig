@@ -1,0 +1,40 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Réalisateur - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    <h1>{{ director.firstname }} {{ director.name }}</h1>
+    <div class="">
+        <article class="col-1-4">
+            <img src="{{ asset(director.image.webPath) }}" alt="{{ director.image.alt }}" width="210" />
+        </article>
+        <article class="col-1-2">
+            <ul class="infoM">
+                <li><span>Date de naissance :</span> {{ director.birth|date('d-m-Y') }}</li>
+                <li><span>Date de mort :</span> {% if director.death is not null %}{{ director.death|date('d-m-Y') }}{% else %}TBA{% endif %}</li>
+                <li><span>Lieu de naissance :</span> {{ director.country }}</li>
+                {% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('wp_platform_adminEditDirector',{'id':director.id}) }}">Modifier le réalisateur</a></li>{% endif %}
+            </ul>
+        </article>
+        <div class="clear"></div>
+    </div>
+    <div class="list">
+        <h2>Films</h2>
+        {% set i = 1 %}
+        {% for movie in movies %}
+            <article class="col-1-6{% if i%6 == 0 %} lastarticle{% endif %}">
+                <a href="{{ path ("wp_platform_movie",{'id': movie.id}) }}"><img src="{{ asset(movie.image.webPath) }}" alt="{{ movie.image.alt }}" width="140" /></a>
+            </article>
+            {% set i = i+1 %}
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+</section>
+{% endblock %}

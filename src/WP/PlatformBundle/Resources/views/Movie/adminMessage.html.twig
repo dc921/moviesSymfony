@@ -1,0 +1,78 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Admin Message - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+
+</header>
+<section>
+    <div id="line">
+        <div class="dline"></div>
+        <h1>Espace administrateur</h1>
+        <div class="dline"></div>
+    </div>
+    {{ include ("WPPlatformBundle:Movie:adminMenu.html.twig") }}
+    <div class="tabAdmin col-3-4">
+        <h2>Nouveaux messages</h2>
+        {% if newMsgs == NULL %}
+            <p>Pas de message</p>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Expéditeur</th>
+                    <th>Sujet</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for newMsg in newMsgs %}
+                <tr>
+                    <td>{{ newMsg.pseudo }}</td>
+                    <td>{{ newMsg.subject }}</td>
+                    <td>{{ newMsg.message }}</td>
+                    <td>{{ newMsg.senddate | date('d/m/Y H:i') }}</td>
+                    <td><a href="{{ path ("wp_platform_adminReadMessage",{"id":newMsg.id}) }}">Lire</a><br /><a href="{{ path("wp_platform_adminDeleteMessage",{"id":newMsg.id}) }}">Supprimer</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <h2>Messages lus</h2>
+        {% if oldMsgs == NULL %}
+            <p>Pas de message</p>
+        {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Expéditeur</th>
+                    <th>Sujet</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for oldMsg in oldMsgs %}
+                <tr>
+                    <td>{{ oldMsg.pseudo }}</td>
+                    <td>{{ oldMsg.subject }}</td>
+                    <td>{{ oldMsg.message }}</td>
+                    <td>{{ oldMsg.senddate | date('d/m/Y H:i') }}</td>
+                    <td><a href="{{ path ("wp_platform_adminReadMessage",{"id":oldMsg.id}) }}">Lire</a><br /><a href="{{ path ("wp_platform_adminDeleteMessage",{"id":oldMsg.id}) }}">Supprimer</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</section>
+{% endblock %}
+
+
+

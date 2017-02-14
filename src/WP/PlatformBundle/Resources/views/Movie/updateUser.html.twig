@@ -1,0 +1,17 @@
+{% extends "WPPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+    Profil - {{ parent() }}
+{% endblock %}
+
+{% block bodyContent %}
+
+    {{ include ("WPPlatformBundle:Movie:menu.html.twig") }}
+</header>
+<section>
+    <div>
+        <h2>Modifier profil</h2>
+        {{ form(form) }}
+    </div>
+</section>
+{% endblock %}
